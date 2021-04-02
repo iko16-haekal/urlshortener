@@ -24,21 +24,26 @@ class shortenerController extends Controller
             ]
         );
 
+        $prefix = $request->prefix;
+        $prefix = explode(" ", $prefix);
+        $prefix = join("-", $prefix);
+
         shortener::create([
             "url" => $request->url,
-            "prefix" => $request->prefix,
+            "prefix" => $prefix,
             "user_id" => Auth::id(),
         ]);
 
         return redirect()->to('/home')->with(
             [
-                "url" => request()->getHost() . "/" .  $request->prefix,
+                "url" => request()->getHost() . "/" .  $prefix,
             ]
         );
     }
 
     public function goto(Request $request, $prefix)
     {
+
         $data =  shortener::where('prefix', $prefix)->first();
         return  redirect()->away($data->url);
     }

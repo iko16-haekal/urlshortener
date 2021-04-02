@@ -48,7 +48,7 @@
                 <table class="table">
                     <thead>
                       <tr>
-                        
+  
                         <th scope="col">url</th>
                         <th scope="col">prefix</th>
                         
